@@ -1,4 +1,4 @@
-rootProject.name = "KotlinPlayground"
+rootProject.name = "KMPPlayground"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
@@ -28,4 +28,9 @@ dependencyResolutionManagement {
     }
 }
 
+plugins {
+    id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
+}
+
 include(":composeApp")
+include(":shared")

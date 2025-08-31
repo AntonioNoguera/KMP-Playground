@@ -1,7 +1,7 @@
 TEAM_ID=
 
-PRODUCT_NAME=KotlinPlayground
-PRODUCT_BUNDLE_IDENTIFIER=com.mike_dev.kotlinplayground.KotlinPlayground$(TEAM_ID)
+PRODUCT_NAME=KMP Playground
+PRODUCT_BUNDLE_IDENTIFIER=org.michael.kmp.playground.KMPPlayground$(TEAM_ID)
 
 CURRENT_PROJECT_VERSION=1
 MARKETING_VERSION=1.0
