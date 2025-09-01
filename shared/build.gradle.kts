@@ -32,7 +32,6 @@ kotlin {
             implementation("io.ktor:ktor-client-content-negotiation:2.3.6")
             implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.6")
             implementation("io.ktor:ktor-client-logging:2.3.6")
-            implementation("io.ktor:ktor-client-plugins:2.3.6")
 
             // Coroutines y Serialization
             implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
@@ -40,6 +39,8 @@ kotlin {
 
             // Dependency Injection
             implementation("io.insert-koin:koin-core:3.5.0")
+
+            implementation(project(":shared"))
         }
 
         androidMain.dependencies {

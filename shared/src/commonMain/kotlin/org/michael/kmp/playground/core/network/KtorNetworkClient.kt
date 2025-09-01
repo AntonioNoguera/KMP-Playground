@@ -1,14 +1,13 @@
 package org.michael.kmp.playground.core.network
 
 import io.ktor.client.*
-import io.ktor.client.call.*
 import io.ktor.client.plugins.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import kotlinx.serialization.serializer
+import org.michael.kmp.playground.placeholder.data.dto.LoginResponseDto
 import kotlin.reflect.KClass
 import kotlin.reflect.KType
 
@@ -78,7 +77,7 @@ class KtorNetworkClient(
                         "LoginResponseDto" -> {
                             val jsonString = response.bodyAsText()
                             kotlinx.serialization.json.Json.decodeFromString(
-                                org.michael.kmp.playground.data.dto.LoginResponseDto.serializer(),
+                                LoginResponseDto.serializer(),
                                 jsonString
                             ) as T
                         }
