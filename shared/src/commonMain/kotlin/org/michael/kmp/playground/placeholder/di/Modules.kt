@@ -1,20 +1,19 @@
-package org.michael.kmp.playground.di
+package org.michael.kmp.playground.placeholder.di
 
 import org.koin.dsl.module
 import org.michael.kmp.playground.core.network.KtorNetworkClient
 import org.michael.kmp.playground.core.network.NetworkClient
 import org.michael.kmp.playground.core.network.createHttpClient
-import org.michael.kmp.playground.data.repositories.AuthRepositoryImpl
-import org.michael.kmp.playground.domain.repositories.AuthRepository
-import org.michael.kmp.playground.domain.usecases.LoginUseCase
+import org.michael.kmp.playground.placeholder.data.repositories.PostRepositoryImpl
+import org.michael.kmp.playground.placeholder.domain.repositories.PostRepository
+import org.michael.kmp.playground.placeholder.domain.usecases.GetPostByIdUseCase
 
-// Módulo de red
 val networkModule = module {
     single { createHttpClient() }
 
     single<NetworkClient> {
         KtorNetworkClient(
-            baseUrl = "http://localhost:3000", // ⬅️ Tu servidor local
+            baseUrl = "https://jsonplaceholder.typicode.com",
             httpClient = get()
         )
     }
@@ -22,12 +21,12 @@ val networkModule = module {
 
 // Módulo de repositorios
 val repositoryModule = module {
-    single<AuthRepository> { AuthRepositoryImpl(get()) }
+    single<PostRepository> { PostRepositoryImpl(get()) }
 }
 
 // Módulo de casos de uso
 val useCaseModule = module {
-    single { LoginUseCase(get()) }
+    single { GetPostByIdUseCase(get()) }
 }
 
 // Lista de todos los módulos
