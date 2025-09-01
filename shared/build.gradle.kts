@@ -55,6 +55,7 @@ kotlin {
 
         commonTest.dependencies {
             implementation(kotlin("test"))
+            implementation("io.ktor:ktor-client-mock:2.3.6")
             implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
         }
     }
