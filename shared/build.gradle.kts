@@ -1,38 +1,61 @@
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
+    alias(libs.plugins.kotlinSerialization)
     alias(libs.plugins.androidLibrary)
 }
 
 kotlin {
+
     androidTarget {
-        @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_11)
         }
     }
-    
+
     listOf(
         iosX64(),
         iosArm64(),
         iosSimulatorArm64()
-    ).forEach { iosTarget ->
-        iosTarget.binaries.framework {
-            baseName = "Shared"
+    ).forEach {
+        it.binaries.framework {
+            baseName = "shared"
             isStatic = true
         }
     }
-    
-    jvm()
-    
+
     sourceSets {
         commonMain.dependencies {
-            // put your Multiplatform dependencies here
+            // Ktor Common
+            implementation("io.ktor:ktor-client-core:2.3.6")
+            implementation("io.ktor:ktor-client-content-negotiation:2.3.6")
+            implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.6")
+            implementation("io.ktor:ktor-client-logging:2.3.6")
+            implementation("io.ktor:ktor-client-plugins:2.3.6")
+
+            // Coroutines y Serialization
+            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
+            implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.2")
+
+            // Dependency Injection
+            implementation("io.insert-koin:koin-core:3.5.0")
         }
+
+        androidMain.dependencies {
+            // Ktor Android Engine
+            implementation("io.ktor:ktor-client-okhttp:2.3.6")
+            implementation("io.insert-koin:koin-android:3.5.0")
+        }
+
+        iosMain.dependencies {
+            // Ktor iOS Engine
+            implementation("io.ktor:ktor-client-darwin:2.3.6")
+        }
+
         commonTest.dependencies {
-            implementation(libs.kotlin.test)
+            implementation(kotlin("test"))
+            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
         }
     }
 }
