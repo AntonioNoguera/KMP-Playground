@@ -38,15 +38,13 @@ kotlin {
             implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.2")
 
             // Dependency Injection
-            implementation("io.insert-koin:koin-core:3.5.0")
-
-            implementation(project(":shared"))
+            implementation("io.insert-koin:koin-core:4.1.0")
         }
 
         androidMain.dependencies {
             // Ktor Android Engine
             implementation("io.ktor:ktor-client-okhttp:2.3.6")
-            implementation("io.insert-koin:koin-android:3.5.0")
+            implementation("io.insert-koin:koin-android:4.1.0")
         }
 
         iosMain.dependencies {
