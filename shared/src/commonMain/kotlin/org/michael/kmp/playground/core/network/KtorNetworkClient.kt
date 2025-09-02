@@ -7,7 +7,6 @@ import io.ktor.client.statement.*
 import io.ktor.http.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import org.michael.kmp.playground.placeholder.data.dto.LoginResponseDto
 import kotlin.reflect.KClass
 import kotlin.reflect.KType
 
@@ -71,25 +70,11 @@ class KtorNetworkClient(
                     response.bodyAsText() as T
                 }
                 else -> {
-                    // Usar serializer específico basado en KClass
-                    @Suppress("UNCHECKED_CAST")
-                    when (responseType.simpleName) {
-                        "LoginResponseDto" -> {
-                            val jsonString = response.bodyAsText()
-                            kotlinx.serialization.json.Json.decodeFromString(
-                                LoginResponseDto.serializer(),
-                                jsonString
-                            ) as T
-                        }
-                        else -> {
-                            // Para otros tipos, intentar deserialización genérica
-                            val jsonString = response.bodyAsText()
-                            kotlinx.serialization.json.Json.decodeFromString(
-                                kotlinx.serialization.serializer(responseType as KType),
-                                jsonString
-                            ) as T
-                        }
-                    }
+                    val jsonString = response.bodyAsText()
+                    kotlinx.serialization.json.Json.decodeFromString(
+                        kotlinx.serialization.serializer(responseType as KType),
+                        jsonString
+                    ) as T
                 }
             }
             NetworkResult.Success(result)

@@ -1,7 +1,7 @@
 package org.michael.kmp.playground.placeholder.data.dto
 
 import kotlinx.serialization.Serializable
-import org.michael.kmp.playground.placeholder.domain.models.Post
+import org.michael.kmp.playground.placeholder.domain.models.PostModel
 
 @Serializable
 data class PostDTO(
@@ -10,7 +10,7 @@ data class PostDTO(
     val title: String,
     val body: String
 ) {
-    fun toDomain() = Post(
+    fun toDomain() = PostModel(
         userId = userId,
         id = id,
         title = title,

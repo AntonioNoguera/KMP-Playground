@@ -18,12 +18,16 @@ kotlin {
         }
     }
     
-    jvm()
+//    jvm()
     
     sourceSets {
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
+
+            implementation(project.dependencies.platform(libs.koin.bom))
+            implementation(libs.koin.android)
+            implementation(libs.koin.compose.viewmodel)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -77,14 +81,14 @@ dependencies {
     debugImplementation(compose.uiTooling)
 }
 
-compose.desktop {
-    application {
-        mainClass = "org.michael.kmp.playground.MainKt"
-
-        nativeDistributions {
-            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "org.michael.kmp.playground"
-            packageVersion = "1.0.0"
-        }
-    }
-}
+//compose.desktop {
+//    application {
+//        mainClass = "org.michael.kmp.playground.MainKt"
+//
+//        nativeDistributions {
+//            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
+//            packageName = "org.michael.kmp.playground"
+//            packageVersion = "1.0.0"
+//        }
+//    }
+//}

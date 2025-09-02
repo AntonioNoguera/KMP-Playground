@@ -1,5 +1,7 @@
 package org.michael.kmp.playground.placeholder.di
 
+
+import io.ktor.client.HttpClient
 import org.koin.dsl.module
 import org.michael.kmp.playground.core.network.KtorNetworkClient
 import org.michael.kmp.playground.core.network.NetworkClient
@@ -9,7 +11,7 @@ import org.michael.kmp.playground.placeholder.domain.repositories.PostRepository
 import org.michael.kmp.playground.placeholder.domain.usecases.GetPostByIdUseCase
 
 val networkModule = module {
-    single { createHttpClient() }
+    single<HttpClient> { createHttpClient() }
 
     single<NetworkClient> {
         KtorNetworkClient(
@@ -19,19 +21,12 @@ val networkModule = module {
     }
 }
 
-// Módulo de repositorios
 val repositoryModule = module {
     single<PostRepository> { PostRepositoryImpl(get()) }
 }
 
-// Módulo de casos de uso
 val useCaseModule = module {
     single { GetPostByIdUseCase(get()) }
 }
 
-// Lista de todos los módulos
-val allModules = listOf(
-    networkModule,
-    repositoryModule,
-    useCaseModule
-)
+val allModules = listOf(networkModule, repositoryModule, useCaseModule)
