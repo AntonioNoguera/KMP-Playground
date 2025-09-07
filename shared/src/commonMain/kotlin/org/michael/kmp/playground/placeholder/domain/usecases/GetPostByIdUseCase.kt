@@ -9,14 +9,13 @@ class GetPostByIdUseCase(
     private val postRepository: PostRepository
 ) {
     suspend operator fun invoke(postId: Int): NetworkResult<PostModel> {
-        // Validación de reglas de negocio
+        // Bussiness Rules
         if (postId <= 0) {
             return NetworkResult.Error(
                 NetworkException.UnknownException("El ID del post debe ser mayor a 0")
             )
         }
 
-        // Delegar al repository
         return postRepository.getPostById(postId)
     }
 }

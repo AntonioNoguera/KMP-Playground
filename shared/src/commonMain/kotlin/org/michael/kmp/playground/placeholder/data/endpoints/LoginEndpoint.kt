@@ -1,0 +1,24 @@
+package org.michael.kmp.playground.placeholder.data.endpoints
+
+import org.michael.kmp.playground.core.network.Endpoint
+import org.michael.kmp.playground.core.network.EndpointMethod
+import org.michael.kmp.playground.placeholder.domain.usecases.LoginParams
+
+class LoginEndpoint (
+    private val data : LoginParams
+): Endpoint() {
+
+    override val path: String = "/v1/login"
+    override val method: EndpointMethod = EndpointMethod.POST
+
+    override val queryParams: Map<String, String>? = null
+
+    override val body: Map<String, Any>? = mapOf(
+        "email" to data.email,
+        "password" to data.password
+    )
+
+    override val headers: Map<String, String> = mapOf(
+        "Content-Type" to "application/json"
+    )
+}

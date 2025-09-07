@@ -7,43 +7,46 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import org.michael.kmp.playground.core.network.NetworkResult
-import org.michael.kmp.playground.placeholder.domain.models.PostModel
+import org.michael.kmp.playground.placeholder.domain.models.AuthModel
 import org.michael.kmp.playground.placeholder.domain.usecases.GetPostByIdUseCase
+import org.michael.kmp.playground.placeholder.domain.usecases.LoginParams
+import org.michael.kmp.playground.placeholder.domain.usecases.LoginUseCase
 
 
 data class PostsUiState(
-    val post: PostModel? = null,
+    val data: AuthModel? = null,
     val isLoading: Boolean = false,
     val errorMessage: String? = null
 )
 
 class PostsViewModel(
-    private val getPostByIdUseCase: GetPostByIdUseCase // Inyectado por Koin
+    private val getPostByIdUseCase: GetPostByIdUseCase, // Inyectado por Koin,
+    private val loginUseCase: LoginUseCase
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(PostsUiState())
     val uiState: StateFlow<PostsUiState> = _uiState.asStateFlow()
 
     init {
-        // Cargar post 1 automáticamente al iniciar
-        loadPost(1)
+        //Por acá llamadas a servicios por defecto!
     }
 
-    fun loadPost(postId: Int) {
+    fun login( email: String, password: String) {
         viewModelScope.launch {
+
             _uiState.value = _uiState.value.copy(
                 isLoading = true,
                 errorMessage = null
             )
 
-            when (val result = getPostByIdUseCase(postId)) {
+            when (val result = loginUseCase(LoginParams(email, password))) {
                 is NetworkResult.Success -> {
                     _uiState.value = _uiState.value.copy(
-                        post = result.data,
+                        data = result.data,
                         isLoading = false
                     )
 
-                    println("Post ${result.data.id} cargado: ${result.data.title}")
+                    println("Login exitoso: ${result.data.token}")
                 }
 
                 is NetworkResult.Error -> {
@@ -51,13 +54,13 @@ class PostsViewModel(
                         isLoading = false,
                         errorMessage = result.exception.message
                     )
-
-                    println("Error cargando post: ${result.exception.message}")
+                    println("Error en login: ${result.exception.message}")
                 }
             }
+
+
         }
     }
-
     fun clearError() {
         _uiState.value = _uiState.value.copy(errorMessage = null)
     }

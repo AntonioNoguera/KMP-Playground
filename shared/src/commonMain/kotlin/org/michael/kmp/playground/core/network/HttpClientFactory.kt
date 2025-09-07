@@ -25,8 +25,9 @@ fun HttpClient.configureClient() = config {
         logger = Logger.DEFAULT
         level = LogLevel.INFO
         filter { request ->
+            //HANDLED APIS (For Loggin)
             request.url.host.contains("jsonplaceholder") ||
-                    request.url.host.contains("yourapi")
+            request.url.host.contains("yourapi")
         }
     }
 

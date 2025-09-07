@@ -73,6 +73,7 @@ class KtorNetworkClient(
                 message = exception.message
             )
             is HttpRequestTimeoutException -> NetworkException.TimeoutException()
+            //TODO: Hace falta el método de verificación de "no internet"
             else -> NetworkException.NetworkError("Network error: ${exception.message}", exception)
         }
     }
