@@ -7,10 +7,7 @@ import org.michael.kmp.playground.core.network.KtorNetworkClient
 import org.michael.kmp.playground.core.network.NetworkClient
 import org.michael.kmp.playground.core.network.createHttpClient
 import org.michael.kmp.playground.placeholder.data.repositories.LoginRepositoryImpl
-import org.michael.kmp.playground.placeholder.data.repositories.PostRepositoryImpl
 import org.michael.kmp.playground.placeholder.domain.repositories.AuthRepository
-import org.michael.kmp.playground.placeholder.domain.repositories.PostRepository
-import org.michael.kmp.playground.placeholder.domain.usecases.GetPostByIdUseCase
 import org.michael.kmp.playground.placeholder.domain.usecases.LoginUseCase
 
 val networkModule = module {
@@ -25,12 +22,10 @@ val networkModule = module {
 }
 
 val repositoryModule = module {
-    single<PostRepository> { PostRepositoryImpl(get()) }
     single<AuthRepository> { LoginRepositoryImpl(get()) }
 }
 
 val useCaseModule = module {
-    single { GetPostByIdUseCase(get()) }
     single { LoginUseCase(get()) }
 }
 

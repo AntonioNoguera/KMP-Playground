@@ -11,14 +11,10 @@ class MainApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        println("🚀 Iniciando Koin en MainApplication...")
-
         startKoin {
             androidLogger()
             androidContext(this@MainApplication)
             modules(allModules + androidModule)
         }
-
-        println("✅ Koin configurado correctamente!")
     }
 }

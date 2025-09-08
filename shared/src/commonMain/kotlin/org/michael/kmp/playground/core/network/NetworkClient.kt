@@ -4,6 +4,15 @@ interface NetworkClient {
     suspend fun executeRequest(endpoint: Endpoint): NetworkResult<String>
 }
 
+object JsonConfig {
+    val json = kotlinx.serialization.json.Json {
+        ignoreUnknownKeys = true
+        isLenient = true
+        prettyPrint = false // Para producción
+        coerceInputValues = true // Convierte valores null a defaults
+    }
+}
+
 // Extension function para deserialización type-safe
 suspend inline fun <reified T> NetworkClient.execute(endpoint: Endpoint): NetworkResult<T> {
     return when (val result = executeRequest(endpoint)) {
@@ -12,10 +21,7 @@ suspend inline fun <reified T> NetworkClient.execute(endpoint: Endpoint): Networ
                 val jsonString = result.data
                 println("JSON response: $jsonString")
 
-                val deserializedObject = kotlinx.serialization.json.Json {
-                    ignoreUnknownKeys = true
-                    isLenient = true
-                }.decodeFromString<T>(jsonString)
+                val deserializedObject = JsonConfig.json.decodeFromString<T>(jsonString)
 
                 NetworkResult.Success(deserializedObject)
             } catch (e: Exception) {

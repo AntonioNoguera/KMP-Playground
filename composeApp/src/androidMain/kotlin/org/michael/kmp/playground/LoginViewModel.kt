@@ -8,10 +8,8 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import org.michael.kmp.playground.core.network.NetworkResult
 import org.michael.kmp.playground.placeholder.domain.models.AuthModel
-import org.michael.kmp.playground.placeholder.domain.usecases.GetPostByIdUseCase
 import org.michael.kmp.playground.placeholder.domain.usecases.LoginParams
 import org.michael.kmp.playground.placeholder.domain.usecases.LoginUseCase
-
 
 data class PostsUiState(
     val data: AuthModel? = null,
@@ -20,7 +18,6 @@ data class PostsUiState(
 )
 
 class PostsViewModel(
-    private val getPostByIdUseCase: GetPostByIdUseCase, // Inyectado por Koin,
     private val loginUseCase: LoginUseCase
 ) : ViewModel() {
 
@@ -61,7 +58,10 @@ class PostsViewModel(
 
         }
     }
-    fun clearError() {
-        _uiState.value = _uiState.value.copy(errorMessage = null)
+    fun clearUser() {
+        _uiState.value = _uiState.value.copy(
+            data = null,
+            errorMessage = null
+        )
     }
 }

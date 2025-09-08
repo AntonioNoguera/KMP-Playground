@@ -49,6 +49,7 @@ fun LoginScreen(
                     Column(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.spacedBy(12.dp)
                     ) {
                         TextField(
                             value = username,
@@ -74,7 +75,30 @@ fun LoginScreen(
                         ) {
                             Text("Iniciar Sesión")
                         }
+
+                        Button(
+                            onClick = {
+
+                            },
+                            modifier = Modifier
+                                .padding(top = 16.dp)
+                                .align(Alignment.End)
+                        ) {
+                            Text("Login con Facebook")
+                        }
+
+                        Button(
+                            onClick = {
+
+                            },
+                            modifier = Modifier
+                                .padding(top = 16.dp)
+                                .align(Alignment.End)
+                        ) {
+                            Text("Login con Google")
+                        }
                     }
+
                 }
 
                 uiState.isLoading -> {
@@ -120,6 +144,16 @@ fun LoginScreen(
                             modifier = Modifier.padding(20.dp)
                         ) {
                             Text("Login exitoso! Token: ${uiState.data?.token}")
+
+                            Button(
+                                onClick = { viewModel.clearUser() },
+                                modifier = Modifier
+                                    .padding(top = 16.dp)
+                                    .align(Alignment.End)
+                                    .fillMaxWidth()
+                            ) {
+                                Text("Eliminar Usuario")
+                            }
                         }
                     }
                 }
