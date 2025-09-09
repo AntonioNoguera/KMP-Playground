@@ -8,6 +8,9 @@ plugins {
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.composeHotReload)
+
+    //Google login
+    alias(libs.plugins.googleGmsGoogleServices)
 }
 
 kotlin {
@@ -28,6 +31,22 @@ kotlin {
             implementation(project.dependencies.platform(libs.koin.bom))
             implementation(libs.koin.android)
             implementation(libs.koin.compose.viewmodel)
+
+
+            implementation("com.facebook.android:facebook-login:16.3.0")
+            implementation("com.facebook.android:facebook-core:16.3.0")
+
+//            implementation("com.google.android.gms:play-services-identity:20.5.0") //Deprecado!
+            //google
+            implementation("androidx.credentials:credentials:1.5.0-alpha05")
+            implementation("androidx.credentials:credentials-play-services-auth:1.5.0-alpha05")
+            implementation("com.google.android.libraries.identity.googleid:googleid:1.1.1")
+
+            // Firebase Auth (si quieres mantener Firebase, opcional)
+            implementation("com.google.firebase:firebase-auth-ktx:22.3.0")
+
+            // Legacy Google Sign-In (fallback opcional)
+            implementation("com.google.android.gms:play-services-auth:21.0.0")
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -68,7 +87,8 @@ android {
     }
     buildTypes {
         getByName("release") {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
         }
     }
     compileOptions {
@@ -78,6 +98,10 @@ android {
 }
 
 dependencies {
+    implementation(libs.firebase.auth)
+    implementation(libs.androidx.credentials)
+    implementation(libs.androidx.credentials.play.services.auth)
+    implementation(libs.googleid)
     debugImplementation(compose.uiTooling)
 }
 

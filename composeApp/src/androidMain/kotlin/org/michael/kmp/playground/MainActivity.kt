@@ -4,14 +4,12 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import com.facebook.FacebookSdk
 import com.facebook.appevents.AppEventsLogger
+import org.michael.kmp.playground.facebook.FacebookAuthProvider
+import org.michael.kmp.playground.google.GoogleFullScreenModalExample
+import org.michael.kmp.playground.google.GoogleSignInDebugScreen
 
 class MainActivity : ComponentActivity() {
 
@@ -33,17 +31,14 @@ class MainActivity : ComponentActivity() {
 //                }
 //            }
 //        }
-
-
         FacebookSdk.sdkInitialize(applicationContext)
         AppEventsLogger.activateApp(application)
 
-        // Crear el provider
         facebookAuthProvider = FacebookAuthProvider(this)
 
         setContent {
             MaterialTheme {
-                FacebookLoginScreen(facebookAuthProvider)
+                GoogleFullScreenModalExample()
             }
         }
 
