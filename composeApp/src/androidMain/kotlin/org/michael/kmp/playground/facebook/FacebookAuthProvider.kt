@@ -1,4 +1,4 @@
-package org.michael.kmp.playground
+package org.michael.kmp.playground.facebook
 
 import com.facebook.*
 import com.facebook.login.LoginManager

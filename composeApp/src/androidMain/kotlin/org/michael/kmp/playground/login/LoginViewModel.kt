@@ -1,4 +1,4 @@
-package org.michael.kmp.playground
+package org.michael.kmp.playground.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

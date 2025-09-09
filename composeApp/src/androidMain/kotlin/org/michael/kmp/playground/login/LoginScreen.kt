@@ -1,4 +1,4 @@
-package org.michael.kmp.playground
+package org.michael.kmp.playground.login
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
