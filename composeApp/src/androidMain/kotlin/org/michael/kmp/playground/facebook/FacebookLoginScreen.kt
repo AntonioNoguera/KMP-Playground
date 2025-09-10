@@ -139,10 +139,6 @@ fun FacebookLoginScreen(
     }
 }
 
-// ==========================================
-// 7. UTILS AUXILIARES
-// ==========================================
-
 object FacebookUtils {
 
     fun isValidUserData(userData: FacebookUserData?): Boolean {
