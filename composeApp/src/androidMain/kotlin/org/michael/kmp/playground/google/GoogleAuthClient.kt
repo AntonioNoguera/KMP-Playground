@@ -18,6 +18,7 @@ import com.google.android.libraries.identity.googleid.GetSignInWithGoogleOption
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
+import org.michael.kmp.playground.R
 
 data class GoogleUserData(
     val userId: String,
@@ -33,8 +34,6 @@ class GoogleAuthClientV2(
     private val tag = "GoogleAuthClient: "
     private val credentialManager = CredentialManager.create(context)
     private val firebaseAuth = FirebaseAuth.getInstance()
-    private val webClientId = "804204957316-8orqt471rt0qi8vs9b6etg7iukhtdgv9.apps.googleusercontent.com"
-    private val webCLient2 = "162144254665-toa3vu2v50m7vs25gc77mjinr55d8fv9.apps.googleusercontent.com"
 
     suspend fun signInWithFullScreenModal(): GoogleUserData? {
         if (isSignedIn()) {
@@ -69,10 +68,9 @@ class GoogleAuthClientV2(
 
     private suspend fun buildFullScreenCredentialRequest(): GetCredentialResponse {
         println(tag + "building FULL SCREEN credential request...")
-        println(tag + "webClientId: $webClientId")
 
         val googleIdOption: GetSignInWithGoogleOption = GetSignInWithGoogleOption.Builder(
-            this.webClientId
+            this.context.getString(R.string.webClientId)
         )
             .setNonce(generateNonce()) // Añadir nonce para forzar modal completo
             .build()
@@ -100,7 +98,7 @@ class GoogleAuthClientV2(
             // Configuración más específica para forzar modal completo
             val googleIdOption = GetGoogleIdOption.Builder()
                 .setFilterByAuthorizedAccounts(false)
-                .setServerClientId(webClientId)
+                .setServerClientId(this.context.getString(R.string.webClientId))
                 .setAutoSelectEnabled(false)
                 .setNonce(generateNonce())
                 // Configuraciones adicionales para modal completo

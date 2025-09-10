@@ -19,6 +19,7 @@ import com.google.android.gms.common.GoogleApiAvailability
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
+import org.michael.kmp.playground.R
 
 class GoogleAuthClient(
     private val context: Context,
@@ -121,9 +122,9 @@ class GoogleAuthClient(
         println(tag + "webClientId: $webClientId")
 
         val googleIdOption = GetGoogleIdOption.Builder()
-            .setFilterByAuthorizedAccounts(false) // ✅ Permite nuevas cuentas
-            .setServerClientId(webClientId)
-            .setAutoSelectEnabled(false) // ✅ Fuerza al usuario a elegir cuenta
+            .setFilterByAuthorizedAccounts(false)
+            .setServerClientId(this.context.getString(R.string.webClientId))
+            .setAutoSelectEnabled(false)
             .build()
 
         val request = GetCredentialRequest.Builder()
