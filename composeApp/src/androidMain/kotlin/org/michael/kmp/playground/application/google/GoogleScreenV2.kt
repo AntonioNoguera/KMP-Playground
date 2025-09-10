@@ -1,4 +1,4 @@
-package org.michael.kmp.playground.google
+package org.michael.kmp.playground.application.google
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*

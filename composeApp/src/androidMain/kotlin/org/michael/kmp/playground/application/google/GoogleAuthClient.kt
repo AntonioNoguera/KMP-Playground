@@ -1,4 +1,4 @@
-package org.michael.kmp.playground.google
+package org.michael.kmp.playground.application.google
 
 import androidx.credentials.CredentialManager
 import androidx.credentials.GetCredentialRequest
@@ -16,9 +16,12 @@ import androidx.credentials.exceptions.GetCredentialCancellationException
 import androidx.credentials.exceptions.NoCredentialException
 import com.google.android.libraries.identity.googleid.GetSignInWithGoogleOption
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthException
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
+import kotlinx.coroutines.delay
 import org.michael.kmp.playground.R
+import java.util.UUID
 
 data class GoogleUserData(
     val userId: String,
@@ -46,16 +49,38 @@ class GoogleAuthClientV2(
             val result = buildFullScreenCredentialRequest()
             handleSignIn(result)
         } catch (e: GetCredentialCancellationException) {
-            println(tag + "❌ User cancelled full screen modal")
+            println(tag + e + "❌ User cancelled full screen modal")
             Toast.makeText(context, "Login cancelado", Toast.LENGTH_SHORT).show()
             null
         } catch (e: NoCredentialException) {
             Toast.makeText(context, "No hay cuentas de Google. Agrega una cuenta en Configuración.", Toast.LENGTH_LONG).show()
-            println(tag + "❌ No credentials available")
+            println(tag + e + "❌ No credentials available")
             null
         } catch (e: GetCredentialException) {
             println(tag + "GetCredentialException: ${e.message}")
             Toast.makeText(context, "Error: ${e.errorMessage}", Toast.LENGTH_LONG).show()
+            null
+        } catch (e: FirebaseAuthException) {
+            val code = e.errorCode ?: "UNKNOWN"
+            when (code) {
+                "ERROR_INVALID_CREDENTIAL",
+                "ERROR_INVALID_SIGNATURE" -> {
+                    println(tag + "❌ SHA-1 no registrada o firma inválida: ${e.message}")
+                    Toast.makeText(
+                        context,
+                        "Error de configuración: agrega el SHA-1/SHA-256 de esta build en Firebase.",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+                else -> {
+                    println(tag + "FirebaseAuthException (${code}): ${e.message}")
+                    Toast.makeText(
+                        context,
+                        "No se pudo iniciar sesión (${code}). Intenta de nuevo.",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            }
             null
         } catch (e: Exception) {
             e.printStackTrace()
@@ -70,7 +95,7 @@ class GoogleAuthClientV2(
         println(tag + "building FULL SCREEN credential request...")
 
         val googleIdOption: GetSignInWithGoogleOption = GetSignInWithGoogleOption.Builder(
-            this.context.getString(R.string.webClientId)
+            this.context.getString(R.string.google_web_client_id)
         )
             .setNonce(generateNonce()) // Añadir nonce para forzar modal completo
             .build()
@@ -98,7 +123,7 @@ class GoogleAuthClientV2(
             // Configuración más específica para forzar modal completo
             val googleIdOption = GetGoogleIdOption.Builder()
                 .setFilterByAuthorizedAccounts(false)
-                .setServerClientId(this.context.getString(R.string.webClientId))
+                .setServerClientId(this.context.getString(R.string.google_web_client_id))
                 .setAutoSelectEnabled(false)
                 .setNonce(generateNonce())
                 // Configuraciones adicionales para modal completo
@@ -109,7 +134,7 @@ class GoogleAuthClientV2(
                 .build()
 
             // Añadir delay para asegurar que el contexto esté listo
-            kotlinx.coroutines.delay(100)
+            delay(100)
 
             val result = credentialManager.getCredential(
                 request = request,
@@ -180,7 +205,7 @@ class GoogleAuthClientV2(
 
     private fun generateNonce(): String {
         // Generar nonce único para cada request
-        return "${System.currentTimeMillis()}_${java.util.UUID.randomUUID()}"
+        return "${System.currentTimeMillis()}_${UUID.randomUUID()}"
     }
 
     fun isSignedIn(): Boolean = firebaseAuth.currentUser != null

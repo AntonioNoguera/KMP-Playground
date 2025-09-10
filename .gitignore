@@ -18,3 +18,4 @@ captures
 **/xcshareddata/WorkspaceSettings.xcsettings
 
 composeApp/src/androidMain/res/values/strings.xml
+composeApp\src\main\res\values\strings.xml
