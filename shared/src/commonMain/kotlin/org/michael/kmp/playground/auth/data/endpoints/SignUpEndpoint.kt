@@ -1,14 +1,14 @@
-package org.michael.kmp.playground.placeholder.data.endpoints
+package org.michael.kmp.playground.auth.data.endpoints
 
+import org.michael.kmp.playground.auth.domain.usecases.LoginParams
 import org.michael.kmp.playground.core.network.Endpoint
 import org.michael.kmp.playground.core.network.EndpointMethod
-import org.michael.kmp.playground.placeholder.domain.usecases.LoginParams
 
-class LoginEndpoint (
+class SignUpEndpoint (
     data : LoginParams
 ): Endpoint {
 
-    override val path: String = "/v1/login"
+    override val path: String = "/v1/signup"
     override val method: EndpointMethod = EndpointMethod.POST
 
     override val body: Map<String, Any>? = mapOf(

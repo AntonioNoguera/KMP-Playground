@@ -1,4 +1,4 @@
-package org.michael.kmp.playground.placeholder.di
+package org.michael.kmp.playground.auth.di
 
 
 import io.ktor.client.HttpClient
@@ -6,9 +6,9 @@ import org.koin.dsl.module
 import org.michael.kmp.playground.core.network.KtorNetworkClient
 import org.michael.kmp.playground.core.network.NetworkClient
 import org.michael.kmp.playground.core.network.createHttpClient
-import org.michael.kmp.playground.placeholder.data.repositories.LoginRepositoryImpl
-import org.michael.kmp.playground.placeholder.domain.repositories.AuthRepository
-import org.michael.kmp.playground.placeholder.domain.usecases.LoginUseCase
+import org.michael.kmp.playground.auth.data.repositories.LoginRepositoryImpl
+import org.michael.kmp.playground.auth.domain.repositories.AuthRepository
+import org.michael.kmp.playground.auth.domain.usecases.LoginUseCase
 
 val networkModule = module {
     single<HttpClient> { createHttpClient() }

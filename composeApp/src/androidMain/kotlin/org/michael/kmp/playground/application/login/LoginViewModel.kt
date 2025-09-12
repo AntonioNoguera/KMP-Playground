@@ -7,9 +7,9 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import org.michael.kmp.playground.core.network.NetworkResult
-import org.michael.kmp.playground.placeholder.domain.models.AuthModel
-import org.michael.kmp.playground.placeholder.domain.usecases.LoginParams
-import org.michael.kmp.playground.placeholder.domain.usecases.LoginUseCase
+import org.michael.kmp.playground.auth.domain.models.AuthModel
+import org.michael.kmp.playground.auth.domain.usecases.LoginParams
+import org.michael.kmp.playground.auth.domain.usecases.LoginUseCase
 
 data class PostsUiState(
     val data: AuthModel? = null,

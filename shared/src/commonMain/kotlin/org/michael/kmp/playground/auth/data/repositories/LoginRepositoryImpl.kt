@@ -1,13 +1,13 @@
-package org.michael.kmp.playground.placeholder.data.repositories
+package org.michael.kmp.playground.auth.data.repositories
 
 import org.michael.kmp.playground.core.network.NetworkClient
 import org.michael.kmp.playground.core.network.NetworkResult
 import org.michael.kmp.playground.core.network.execute
-import org.michael.kmp.playground.placeholder.data.dto.AuthDTO
-import org.michael.kmp.playground.placeholder.data.endpoints.LoginEndpoint
-import org.michael.kmp.playground.placeholder.domain.models.AuthModel
-import org.michael.kmp.playground.placeholder.domain.repositories.AuthRepository
-import org.michael.kmp.playground.placeholder.domain.usecases.LoginParams
+import org.michael.kmp.playground.auth.data.dto.AuthDTO
+import org.michael.kmp.playground.auth.data.endpoints.LoginEndpoint
+import org.michael.kmp.playground.auth.domain.models.AuthModel
+import org.michael.kmp.playground.auth.domain.repositories.AuthRepository
+import org.michael.kmp.playground.auth.domain.usecases.LoginParams
 
 class LoginRepositoryImpl (
     private val networkClient: NetworkClient
