@@ -5,4 +5,5 @@ import org.michael.kmp.playground.auth.domain.models.AuthModel
 
 interface AuthRepository {
     suspend fun login(email: String, password: String) : NetworkResult<AuthModel>
+    suspend fun signUp(email: String, password: String) : NetworkResult<AuthModel>
 }

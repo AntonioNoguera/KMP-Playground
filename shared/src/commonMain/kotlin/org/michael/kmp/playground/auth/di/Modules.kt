@@ -9,6 +9,7 @@ import org.michael.kmp.playground.core.network.createHttpClient
 import org.michael.kmp.playground.auth.data.repositories.LoginRepositoryImpl
 import org.michael.kmp.playground.auth.domain.repositories.AuthRepository
 import org.michael.kmp.playground.auth.domain.usecases.LoginUseCase
+import org.michael.kmp.playground.auth.domain.usecases.SignUpUseCase
 
 val networkModule = module {
     single<HttpClient> { createHttpClient() }
@@ -27,6 +28,7 @@ val repositoryModule = module {
 
 val useCaseModule = module {
     single { LoginUseCase(get()) }
+    single { SignUpUseCase(get()) }
 }
 
 val allModules = listOf(networkModule, repositoryModule, useCaseModule)
