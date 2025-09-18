@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 class FlagsViewModel(
     app: Application,
     private val repo: FetchTriggerRepository
-) : AndroidViewModel(app) { // 🔑 Usa AndroidViewModel para tener context
+) : AndroidViewModel(app) {asdf// 🔑 Usa AndroidViewModel para tener context
 
     init {
         repo.start()

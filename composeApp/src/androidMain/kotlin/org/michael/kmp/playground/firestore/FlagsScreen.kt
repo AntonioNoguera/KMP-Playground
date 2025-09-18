@@ -17,9 +17,6 @@ fun FlagsScreen(
     var status by remember { mutableStateOf("Esperando trigger...") }
     var isLoading by remember { mutableStateOf(false) }
 
-
-    // Escucha los logs del fetch en el VM (si agregas callbacks)
-    // Aquí lo hacemos simple: cuando arranca un fetch, cambia el estado.
     LaunchedEffect(Unit) {
         // podrías exponer un Flow en el VM y recolectarlo aquí
     }

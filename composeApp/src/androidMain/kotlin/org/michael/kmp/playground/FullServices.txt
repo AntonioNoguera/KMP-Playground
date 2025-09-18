@@ -1,0 +1,348 @@
+// SERVICES MOBILE ANDROID! 48?
+
+Basket Api Service [4]
+    const val CREATE_BASKET = "v1/basket/create"
+    const val LOAD_BOOKING = "v1/basket/loadbooking"
+    const val UPDATE_BASKET = "v1/basket/update"
+    const val GET_BASKET = "v1/basket"
+
+Account Api Service [6]
+		const val GET_ACCOUNT_INFO = "v1/account"
+		const val DOTERS_OPT_OUT = "v1/account/loyalty/optout"
+		const val UPDATE_ACCOUNT_INFO = "v1/account/update"
+		const val ACCEPT_TERMS = "v1/account/acceptterms"
+		const val UPLOAD_PHOTO = "vb/v1/account/uploadPhoto"
+		const val DELETE_PHOTO = "vb/v1/account/deletePhoto"
+
+Doters Api Service [1]
+    const val LOGOUT_EXTERNAL = "v2/logout"
+
+Boarding Pass Api Service [1]
+
+Bundles Api Service [2]
+    const val GET_AVAILABLE_BUNDLES = "v1/booking/availablebundles"
+    const val POST_ADD_BUNDLES = "v1/booking/bundles"
+
+Check In Api Service [3]
+    const val GET_CHECK_IN_STATUS = "v1/checkin/status"
+    const val CHECK_IN_PASSENGER = "v1/checkin/passenger"
+    const val CHECK_IN_UNDO_PASSENGER = "v1/checkin/undopassenger"
+
+Companion Api Service [4]
+    const val ADD_COMPANION = "v1/account/companions/add"
+    const val GET_COMPANIONS = "v1/account/companions"
+    const val UPDATE_COMPANION = "v1/account/companions/update"
+    const val DELETE_COMPANION = "v1/account/companions/delete"
+
+Dynamic Yield Api Service [2]
+    const val COLLECT_EVENT = "v2/collect/user/event"
+    const val CHOOSE_EVENT = "v2/serve/user/choose"
+
+Google Walet Api Service [1]
+    const val FETCH_BOARDING_PASSES_FOR_WALLET = "vb/v1/share/googlewallet"
+
+Fares Api Service [3]
+    const val FETCH_AVAILABILITY_SCHEDULE = "v1/availability/schedule"
+    const val FETCH_AVAILABILITY_LOW_FARES = "v1/availability/lowfares"
+    const val FETCH_AVAILABILITY_LOW_FARES_CACHE = "vb/v1/availability/lowfares"
+
+OTP Api Service [3]
+    const val SECURITY_LOGIN = "v1/security/login"
+    const val SECRET_DETAILS = "v1/members/{memberId}/details/secretDetails"
+    const val GENERATE_OTP = "v1/security/generate-otp"
+
+Payment Methods Api Service [2]
+    const val GET_PAYMENT_METHODS = "v1/account/storedpayments"
+	const val DELETE_PAYMENT_METHODS = "v1/account/storedpayments/delete"
+
+Resources Api Service [4]
+    const val GET_COUNTRIES = "v1/resources/countries"
+    const val GET_CURRENCIES = "v1/resources/currencies"
+    const val GET_STATIONS = "vb/v1/resources/stations"
+    const val GET_PROVINCES = "v1/resources/provinces"
+
+Search Api Service [4]
+    const val SEARCH_AVAILABILITY = "v1/availability/search"
+    const val ADD_JOURNEYS = "v1/booking/journeys"
+    const val SEARCH_JOURNEYS = "v1/booking/searchjourneys"
+    const val AVAILABILITY_SEARCH = "/v1/booking/searchavailability"
+
+Seats Api Service [3]
+    const val FETCH_SEAT_MAPS = "v1/booking/seatmaps"
+    const val FETCH_PROPOSED_SEATS = "v1/booking/proposedseats"
+    const val CHANGE_SEATS = "v1/booking/changeseats"
+
+Share Api Service [2]
+    const val SHARE_TRIP = "vb/v1/share/trip"
+    const val SHARE_CONFIRMATION_TRIP = "vb/v1/share/confirmation"
+
+Flight Status Api Service [3]
+    const val FETCH_FLIGHT_STATUS = "vb/v1/flightstatuscenter"
+    const val FETCH_FLIGHT_STATUS_V2 = "vb/v1/flightstatus"
+    const val GET_INFORMATION_PLANE = "vb/v1/GetInformationPlane"
+
+
+Notifications Api Service [3]
+    const val FETCH_NOTIFICATIONS_SUBSCRIPTIONS = "vb/v1/notifications/subscriptions"
+    const val ADD_NOTIFICATIONS = "vb/v1/notifications/add"
+    const val DELETE_NOTIFICATION = "vb/v1/notifications/delete"
+
+Trips Api Service [3]
+    const val GET_ACCOUNT_TRIPS = "v1/account/trips"
+    const val ADD_TRIP_TO_ACCOUNT = "v1/account/trips/add"
+    const val DELETE_TRIP_TO_ACCOUNT = "v1/account/trips/delete"
+
+Viva Cash Api Service [4]:
+    const val GET_DETAIL = "v2/account/vivacash"
+    const val FETCH_TRANSACTIONS = "v1/account/vivacash/transactions"
+    const val FETCH_ACTIVE_REFERENCES = "v1/account/vivacash/activereferences"
+    const val GENERATE_REFERENCE = "v1/account/vivacash/generatereference"
+
+// iOS -> 42!
+NetworkGeneralRouterAF [7]
+    case .loginAccount:
+        "/account/login"
+    case .accountFunds:
+        "/account/funds"
+    case .getBookingAvailableServices:
+        "/booking/availableservices"
+    case .getBookingAvailableInsurances:
+        "/booking/availableinsurances"
+    case .bookingChangeInsurances:
+        "/booking/changeinsurances"
+    case .getBoardingPass:
+        "/checkin/boardingpass"
+    case .postOTAVerification:
+        "/booking/verify"
+
+NetworkGlobalRouter
+case .registerAccount:
+    return "/account/register"
+case .loginAccount:
+    return "/account/login"
+case .loginExternal:
+    return "/account/loginexternal"
+// Password
+case .getRequestPasswordReset:
+    return "account/requestpasswordreset"
+case .resetPassword:
+    return "/account/resetpassword"
+case .changePassword:
+    return "/account/changepassword"
+case .restoreSession:
+    return "/account/restore"
+case .validateToken:
+    return "/account/validatetoken"
+// Trips
+case .getTrips:
+    return "/account/trips"
+case .addTrip:
+    return "/account/trips/add"
+case .deleteTrip:
+    return "/account/trips/delete"
+// Viva Cash
+case .getVivaCashDetails:
+    return "/account/vivacash"
+case .getVivaCashTransactions:
+    return "/account/vivacash/transactions"
+case .generateReference:
+    return "/account/vivacash/generatereference"
+case .getVivaCashActiveReferences:
+    return "/account/vivacash/activereferences"
+// PersonalAccount
+case .getAccount:
+    return "/account"
+case .updateAccount:
+    return "/account/update"
+case .updateAccountAvatar:
+    return "/account/update"
+case .updatePhoto:
+    return "/account/update"
+case .deactivateAccount:
+    return "/account/deactivate"
+case .deactivateDotersAccount:
+    return "/account/loyalty/optout"
+case .acceptTerms:
+    return "/account/acceptterms"
+case .updateProfilePhotos:
+    return "/account/update"
+// Companions
+case .getCompanions:
+    return "/account/companions"
+case .addCompanion:
+    return "/account/companions/add"
+case .updateCompanion:
+    return "/account/companions/update"
+case .deleteCompanion:
+    return "/account/companions/delete"
+// Documents
+case .getDocuments:
+    return "/account/traveldocuments"
+case .addDocument:
+    return "/account/traveldocuments/add"
+case .updateDocument:
+    return "/account/traveldocuments/update"
+case .deleteDocument:
+    return "/account/traveldocuments/delete"
+// StoredPayments
+case .getStoredPayments:
+    return "/account/storedpayments"
+case .setDefaultStoredPayments:
+    return "/account/storedpayments/setDefault"
+case .deleteStoredPayments:
+    return "/account/storedpayments/delete"
+// Catalogs
+case .fetchCountries:
+    return "/resources/countries"
+case .fetchProvinces:
+    return "/resources/provinces"
+case .getStations:
+    return "/resources/stations"
+case .getCurrencies:
+    return "/resources/currencies"
+// Booking
+case .getBooking:
+    return "/booking"
+case .getBookingFull:
+    return "/booking/full"
+case .getBookingPassengerRules:
+    return "/booking/passengerrules"
+case .getBookingAvailableServices:
+    return "/booking/availableservices"
+case .getBookingAvailableBundles:
+    return "/booking/availablebundles"
+case .bookingChangeServices:
+    return "/booking/changeservices"
+case .bookingBundles:
+    return "/booking/bundles"
+case .bookingGuestFee:
+    return "/booking/guestfee"
+case .bookingUpdatePassengers:
+    return "/booking/updatepassengers"
+case .bookingGetSeatmaps:
+    return "/booking/seatmaps"
+case .bookingGetProposedSeats:
+    return "/booking/proposedseats"
+case .bookingChangeSeats:
+    return "/booking/changeseats"
+case .bookingSetPassengers:
+    return "/booking/passengers"
+case .changeJourneys:
+    return "/booking/changejourneys"
+// Basket
+case .getBasket:
+    return "/basket"
+case .createBasket:
+    return "/basket/create"
+case .basketLoadBooking:
+    return "/basket/loadbooking"
+case .basketSetBookingJourneys:
+    return "/booking/journeys"
+case .basketUpdate:
+    return "basket/update"
+// Check in
+case .getCheckInStatus:
+    return "/checkin/status"
+case .performCheckInWithPassengers:
+    return "/checkin/passenger"
+case .cancelCheckIn:
+    return "/checkin/undopassenger"
+case .getBoardingPass:
+    return "/checkin/boardingpass"
+// Booking schedules
+case .availabilitySchedule:
+    return "/availability/schedule"
+case .availabilityLowfares:
+    return "/availability/lowfares"
+case .availabilitySearch:
+    return "/availability/search"
+case .setSelectedPaymentMethod:
+    return "/payment/selectmethod"
+case .bookingSearch:
+    return "/booking/searchjourneys"
+}
+
+ExternalAuthRouter [1]
+return "/logout"
+
+NetworkBinProvider [1]
+case .cardBin:
+    return "/vb/v1/bin"
+
+NetworkVBProvider [15]
+case .flightStatus:
+    return "/flightstatus"
+case .getSuscriptions:
+    return "/notifications/subscriptions"
+case .addSuscription:
+    return "/notifications/add"
+case .deleteSuscription:
+    return "/notifications/delete"
+case .postSharedBoardingPass:
+    return "/share/boardingpass"
+case .shareBookingTrip:
+    return "/share/trip"
+case .externalPayment:
+    return "/externalpayment/references"
+case .onlinePayment:
+    return "/externalpayment/onlinepayment"
+case .getInformationPlane:
+    return "/GetInformationPlane"
+case .getFlightStatusCenter:
+    return "/flightstatuscenter"
+case .availabilityLowfares:
+    return "/availability/lowfares"
+case .uploadPhoto:
+    return "/account/uploadPhoto"
+case .deletePhoto:
+    return "/account/deletePhoto"
+case .shareConfirmation:
+    return "/share/confirmation"
+case let .marketPlaceActions(pnr):
+    return "/booking/marketplace/pnr-\(pnr)/actions"
+case .fetchGlobalStations:
+    return "/resources/stations"
+
+NetworkPaymentProviderAF
+case .paymentMethodsAvailable:
+    return "/payment/methodsavailable"
+case .paymentProcess:
+    return "/payment/process"
+case .paymentCheckStatus:
+    return "/payment/checkstatus"
+case .paymentRappi:
+    return "/payment/process"
+case .addSplitPayment:
+    return "/payment/addsplitpayment"
+case .addSplitPaymentVoucher:
+    log.error("TODO: Quitar Separación Voucher y Split Payment")
+    return "/payment/addsplitpayment"
+case .deleteSplitPayment:
+    return "/payment/deletesplitpayment"
+case .cancelPendingPayment:
+    return "/payment/cancel"
+
+NetworkVivaCashProvider [1]
+case .vivaCashCheckoutBalance:
+            return Environment.vivaCashPath
+
+NetworkDotersProvider [3]
+case .login:
+    return "/v1/security/login"
+case let .secretDetails(memberId, _):
+    return "/v1/members/\(memberId)/details/secretDetails"
+case .generateOTP:
+    return "/v1/security/generate-otp"
+
+NetworkGeneralRouterV2 [5]
+case .registerAccount:
+    return "/account/register"
+case .confirmRegistration:
+    return "/account/confirmregistration"
+// Password
+case .getRequestPasswordReset:
+    return "account/requestpasswordreset"
+case .resetPassword:
+    return "/account/resetpassword"
+case .getVivaCashDetails:
+    return "/account/vivacash"
