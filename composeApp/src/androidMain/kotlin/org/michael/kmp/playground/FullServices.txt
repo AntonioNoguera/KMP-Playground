@@ -98,251 +98,151 @@ Viva Cash Api Service [4]:
     const val FETCH_ACTIVE_REFERENCES = "v1/account/vivacash/activereferences"
     const val GENERATE_REFERENCE = "v1/account/vivacash/generatereference"
 
-// iOS -> 42!
+// iOS Arquitecture
 NetworkGeneralRouterAF [7]
-    case .loginAccount:
-        "/account/login"
-    case .accountFunds:
-        "/account/funds"
-    case .getBookingAvailableServices:
-        "/booking/availableservices"
-    case .getBookingAvailableInsurances:
-        "/booking/availableinsurances"
-    case .bookingChangeInsurances:
-        "/booking/changeinsurances"
-    case .getBoardingPass:
-        "/checkin/boardingpass"
-    case .postOTAVerification:
-        "/booking/verify"
+    const val LOGIN_ACCOUNT = "account/login"
+    const val ACCOUNT_FUNDS = "account/funds"
+    const val GET_BOOKING_AVAILABLE_SERVICES = "booking/availableservices"
+    const val GET_BOOKING_AVAILABLE_INSURANCES = "booking/availableinsurances"
+    const val BOOKING_CHANGE_INSURANCES = "booking/changeinsurances"
+    const val GET_BOARDING_PASS = "checkin/boardingpass"
+    const val POST_OTA_VERIFICATION = "booking/verify"
 
-NetworkGlobalRouter
-case .registerAccount:
-    return "/account/register"
-case .loginAccount:
-    return "/account/login"
-case .loginExternal:
-    return "/account/loginexternal"
-// Password
-case .getRequestPasswordReset:
-    return "account/requestpasswordreset"
-case .resetPassword:
-    return "/account/resetpassword"
-case .changePassword:
-    return "/account/changepassword"
-case .restoreSession:
-    return "/account/restore"
-case .validateToken:
-    return "/account/validatetoken"
-// Trips
-case .getTrips:
-    return "/account/trips"
-case .addTrip:
-    return "/account/trips/add"
-case .deleteTrip:
-    return "/account/trips/delete"
-// Viva Cash
-case .getVivaCashDetails:
-    return "/account/vivacash"
-case .getVivaCashTransactions:
-    return "/account/vivacash/transactions"
-case .generateReference:
-    return "/account/vivacash/generatereference"
-case .getVivaCashActiveReferences:
-    return "/account/vivacash/activereferences"
-// PersonalAccount
-case .getAccount:
-    return "/account"
-case .updateAccount:
-    return "/account/update"
-case .updateAccountAvatar:
-    return "/account/update"
-case .updatePhoto:
-    return "/account/update"
-case .deactivateAccount:
-    return "/account/deactivate"
-case .deactivateDotersAccount:
-    return "/account/loyalty/optout"
-case .acceptTerms:
-    return "/account/acceptterms"
-case .updateProfilePhotos:
-    return "/account/update"
-// Companions
-case .getCompanions:
-    return "/account/companions"
-case .addCompanion:
-    return "/account/companions/add"
-case .updateCompanion:
-    return "/account/companions/update"
-case .deleteCompanion:
-    return "/account/companions/delete"
-// Documents
-case .getDocuments:
-    return "/account/traveldocuments"
-case .addDocument:
-    return "/account/traveldocuments/add"
-case .updateDocument:
-    return "/account/traveldocuments/update"
-case .deleteDocument:
-    return "/account/traveldocuments/delete"
-// StoredPayments
-case .getStoredPayments:
-    return "/account/storedpayments"
-case .setDefaultStoredPayments:
-    return "/account/storedpayments/setDefault"
-case .deleteStoredPayments:
-    return "/account/storedpayments/delete"
-// Catalogs
-case .fetchCountries:
-    return "/resources/countries"
-case .fetchProvinces:
-    return "/resources/provinces"
-case .getStations:
-    return "/resources/stations"
-case .getCurrencies:
-    return "/resources/currencies"
-// Booking
-case .getBooking:
-    return "/booking"
-case .getBookingFull:
-    return "/booking/full"
-case .getBookingPassengerRules:
-    return "/booking/passengerrules"
-case .getBookingAvailableServices:
-    return "/booking/availableservices"
-case .getBookingAvailableBundles:
-    return "/booking/availablebundles"
-case .bookingChangeServices:
-    return "/booking/changeservices"
-case .bookingBundles:
-    return "/booking/bundles"
-case .bookingGuestFee:
-    return "/booking/guestfee"
-case .bookingUpdatePassengers:
-    return "/booking/updatepassengers"
-case .bookingGetSeatmaps:
-    return "/booking/seatmaps"
-case .bookingGetProposedSeats:
-    return "/booking/proposedseats"
-case .bookingChangeSeats:
-    return "/booking/changeseats"
-case .bookingSetPassengers:
-    return "/booking/passengers"
-case .changeJourneys:
-    return "/booking/changejourneys"
-// Basket
-case .getBasket:
-    return "/basket"
-case .createBasket:
-    return "/basket/create"
-case .basketLoadBooking:
-    return "/basket/loadbooking"
-case .basketSetBookingJourneys:
-    return "/booking/journeys"
-case .basketUpdate:
-    return "basket/update"
-// Check in
-case .getCheckInStatus:
-    return "/checkin/status"
-case .performCheckInWithPassengers:
-    return "/checkin/passenger"
-case .cancelCheckIn:
-    return "/checkin/undopassenger"
-case .getBoardingPass:
-    return "/checkin/boardingpass"
-// Booking schedules
-case .availabilitySchedule:
-    return "/availability/schedule"
-case .availabilityLowfares:
-    return "/availability/lowfares"
-case .availabilitySearch:
-    return "/availability/search"
-case .setSelectedPaymentMethod:
-    return "/payment/selectmethod"
-case .bookingSearch:
-    return "/booking/searchjourneys"
-}
+NetworkGlobalRouter [30]
+// Account Management [10]
+const val REGISTER_ACCOUNT = "account/register"
+const val LOGIN_ACCOUNT = "account/login"
+const val LOGIN_EXTERNAL = "account/loginexternal"
+const val GET_REQUEST_PASSWORD_RESET = "account/requestpasswordreset"
+const val RESET_PASSWORD = "account/resetpassword"
+const val CHANGE_PASSWORD = "account/changepassword"
+const val RESTORE_SESSION = "account/restore"
+const val VALIDATE_TOKEN = "account/validatetoken"
+const val DEACTIVATE_ACCOUNT = "account/deactivate"
+const val ACCEPT_TERMS = "account/acceptterms"
+
+// Personal Account [6]
+const val GET_ACCOUNT = "account"
+const val UPDATE_ACCOUNT = "account/update"
+const val UPDATE_ACCOUNT_AVATAR = "account/update"
+const val UPDATE_PHOTO = "account/update"
+const val DEACTIVATE_DOTERS_ACCOUNT = "account/loyalty/optout"
+const val UPDATE_PROFILE_PHOTOS = "account/update"
+
+// Trips [3]
+const val GET_TRIPS = "account/trips"
+const val ADD_TRIP = "account/trips/add"
+const val DELETE_TRIP = "account/trips/delete"
+
+// Viva Cash [4]
+const val GET_VIVA_CASH_DETAILS = "account/vivacash"
+const val GET_VIVA_CASH_TRANSACTIONS = "account/vivacash/transactions"
+const val GENERATE_REFERENCE = "account/vivacash/generatereference"
+const val GET_VIVA_CASH_ACTIVE_REFERENCES = "account/vivacash/activereferences"
+
+// Companions [4]
+const val GET_COMPANIONS = "account/companions"
+const val ADD_COMPANION = "account/companions/add"
+const val UPDATE_COMPANION = "account/companions/update"
+const val DELETE_COMPANION = "account/companions/delete"
+
+// Documents [4]
+const val GET_DOCUMENTS = "account/traveldocuments"
+const val ADD_DOCUMENT = "account/traveldocuments/add"
+const val UPDATE_DOCUMENT = "account/traveldocuments/update"
+const val DELETE_DOCUMENT = "account/traveldocuments/delete"
+
+// Stored Payments [3]
+const val GET_STORED_PAYMENTS = "account/storedpayments"
+const val SET_DEFAULT_STORED_PAYMENTS = "account/storedpayments/setDefault"
+const val DELETE_STORED_PAYMENTS = "account/storedpayments/delete"
+
+// Resources [4]
+const val FETCH_COUNTRIES = "resources/countries"
+const val FETCH_PROVINCES = "resources/provinces"
+const val GET_STATIONS = "resources/stations"
+const val GET_CURRENCIES = "resources/currencies"
+
+// Booking [15]
+const val GET_BOOKING = "booking"
+const val GET_BOOKING_FULL = "booking/full"
+const val GET_BOOKING_PASSENGER_RULES = "booking/passengerrules"
+const val GET_BOOKING_AVAILABLE_SERVICES = "booking/availableservices"
+const val GET_BOOKING_AVAILABLE_BUNDLES = "booking/availablebundles"
+const val BOOKING_CHANGE_SERVICES = "booking/changeservices"
+const val BOOKING_BUNDLES = "booking/bundles"
+const val BOOKING_GUEST_FEE = "booking/guestfee"
+const val BOOKING_UPDATE_PASSENGERS = "booking/updatepassengers"
+const val BOOKING_GET_SEATMAPS = "booking/seatmaps"
+const val BOOKING_GET_PROPOSED_SEATS = "booking/proposedseats"
+const val BOOKING_CHANGE_SEATS = "booking/changeseats"
+const val BOOKING_SET_PASSENGERS = "booking/passengers"
+const val CHANGE_JOURNEYS = "booking/changejourneys"
+const val BOOKING_SEARCH = "booking/searchjourneys"
+
+// Basket [5]
+const val GET_BASKET = "basket"
+const val CREATE_BASKET = "basket/create"
+const val BASKET_LOAD_BOOKING = "basket/loadbooking"
+const val BASKET_SET_BOOKING_JOURNEYS = "booking/journeys"
+const val BASKET_UPDATE = "basket/update"
+
+// Check In [4]
+const val GET_CHECK_IN_STATUS = "checkin/status"
+const val PERFORM_CHECK_IN_WITH_PASSENGERS = "checkin/passenger"
+const val CANCEL_CHECK_IN = "checkin/undopassenger"
+const val GET_BOARDING_PASS = "checkin/boardingpass"
+
+// Availability [4]
+const val AVAILABILITY_SCHEDULE = "availability/schedule"
+const val AVAILABILITY_LOWFARES = "availability/lowfares"
+const val AVAILABILITY_SEARCH = "availability/search"
+const val SET_SELECTED_PAYMENT_METHOD = "payment/selectmethod"
 
 ExternalAuthRouter [1]
-return "/logout"
+const val LOGOUT = "logout"
 
 NetworkBinProvider [1]
-case .cardBin:
-    return "/vb/v1/bin"
+const val CARD_BIN = "vb/v1/bin"
 
 NetworkVBProvider [15]
-case .flightStatus:
-    return "/flightstatus"
-case .getSuscriptions:
-    return "/notifications/subscriptions"
-case .addSuscription:
-    return "/notifications/add"
-case .deleteSuscription:
-    return "/notifications/delete"
-case .postSharedBoardingPass:
-    return "/share/boardingpass"
-case .shareBookingTrip:
-    return "/share/trip"
-case .externalPayment:
-    return "/externalpayment/references"
-case .onlinePayment:
-    return "/externalpayment/onlinepayment"
-case .getInformationPlane:
-    return "/GetInformationPlane"
-case .getFlightStatusCenter:
-    return "/flightstatuscenter"
-case .availabilityLowfares:
-    return "/availability/lowfares"
-case .uploadPhoto:
-    return "/account/uploadPhoto"
-case .deletePhoto:
-    return "/account/deletePhoto"
-case .shareConfirmation:
-    return "/share/confirmation"
-case let .marketPlaceActions(pnr):
-    return "/booking/marketplace/pnr-\(pnr)/actions"
-case .fetchGlobalStations:
-    return "/resources/stations"
+const val FLIGHT_STATUS = "vb/v1/flightstatus"
+const val GET_SUBSCRIPTIONS = "vb/v1/notifications/subscriptions"
+const val ADD_SUBSCRIPTION = "vb/v1/notifications/add"
+const val DELETE_SUBSCRIPTION = "vb/v1/notifications/delete"
+const val POST_SHARED_BOARDING_PASS = "vb/v1/share/boardingpass"
+const val SHARE_BOOKING_TRIP = "vb/v1/share/trip"
+const val EXTERNAL_PAYMENT = "vb/v1/externalpayment/references"
+const val ONLINE_PAYMENT = "vb/v1/externalpayment/onlinepayment"
+const val GET_INFORMATION_PLANE = "vb/v1/GetInformationPlane"
+const val GET_FLIGHT_STATUS_CENTER = "vb/v1/flightstatuscenter"
+const val AVAILABILITY_LOWFARES = "vb/v1/availability/lowfares"
+const val UPLOAD_PHOTO = "vb/v1/account/uploadPhoto"
+const val DELETE_PHOTO = "vb/v1/account/deletePhoto"
+const val SHARE_CONFIRMATION = "vb/v1/share/confirmation"
+const val FETCH_GLOBAL_STATIONS = "vb/v1/resources/stations"
 
-NetworkPaymentProviderAF
-case .paymentMethodsAvailable:
-    return "/payment/methodsavailable"
-case .paymentProcess:
-    return "/payment/process"
-case .paymentCheckStatus:
-    return "/payment/checkstatus"
-case .paymentRappi:
-    return "/payment/process"
-case .addSplitPayment:
-    return "/payment/addsplitpayment"
-case .addSplitPaymentVoucher:
-    log.error("TODO: Quitar Separación Voucher y Split Payment")
-    return "/payment/addsplitpayment"
-case .deleteSplitPayment:
-    return "/payment/deletesplitpayment"
-case .cancelPendingPayment:
-    return "/payment/cancel"
+NetworkPaymentProviderAF [8]
+const val PAYMENT_METHODS_AVAILABLE = "payment/methodsavailable"
+const val PAYMENT_PROCESS = "payment/process"
+const val PAYMENT_RAPPI = "payment/process"
+const val PAYMENT_CHECK_STATUS = "payment/checkstatus"
+const val ADD_SPLIT_PAYMENT = "payment/addsplitpayment"
+const val ADD_SPLIT_PAYMENT_VOUCHER = "payment/addsplitpayment"
+const val DELETE_SPLIT_PAYMENT = "payment/deletesplitpayment"
+const val CANCEL_PENDING_PAYMENT = "payment/cancel"
 
 NetworkVivaCashProvider [1]
-case .vivaCashCheckoutBalance:
-            return Environment.vivaCashPath
+const val VIVA_CASH_CHECKOUT_BALANCE = "vivacash/checkout/balance"
 
 NetworkDotersProvider [3]
-case .login:
-    return "/v1/security/login"
-case let .secretDetails(memberId, _):
-    return "/v1/members/\(memberId)/details/secretDetails"
-case .generateOTP:
-    return "/v1/security/generate-otp"
+const val LOGIN = "v1/security/login"
+const val SECRET_DETAILS = "v1/members/{memberId}/details/secretDetails"
+const val GENERATE_OTP = "v1/security/generate-otp"
 
 NetworkGeneralRouterV2 [5]
-case .registerAccount:
-    return "/account/register"
-case .confirmRegistration:
-    return "/account/confirmregistration"
-// Password
-case .getRequestPasswordReset:
-    return "account/requestpasswordreset"
-case .resetPassword:
-    return "/account/resetpassword"
-case .getVivaCashDetails:
-    return "/account/vivacash"
+const val REGISTER_ACCOUNT = "account/register"
+const val CONFIRM_REGISTRATION = "account/confirmregistration"
+const val GET_REQUEST_PASSWORD_RESET = "account/requestpasswordreset"
+const val RESET_PASSWORD = "account/resetpassword"
+const val GET_VIVA_CASH_DETAILS = "account/vivacash"
